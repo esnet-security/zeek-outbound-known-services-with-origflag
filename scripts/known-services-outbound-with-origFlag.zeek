@@ -223,10 +223,20 @@ function KnownOut::known_services_done(c: connection)
 		event KnownOut::service_info_commit(info);
 	}
 
+@if ( Version::at_least("5.2") )
+event analyzer_confirmation_info(atype: AllAnalyzers::Tag, info: AnalyzerConfirmationInfo) &priority=-5
+	{
+	if(info?$c)
+		{
+		KnownOut::known_services_done(info$c);
+		}
+	}
+@else
 event analyzer_confirmation(c: connection, atype: Analyzer::Tag, aid: count) &priority=-5
 	{
 	KnownOut::known_services_done(c);
 	}
+@endif
 
 # Handle the connection ending in case no protocol was ever detected.
 event connection_state_remove(c: connection) &priority=-5
