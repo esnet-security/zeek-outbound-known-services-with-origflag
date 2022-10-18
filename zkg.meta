@@ -1,4 +1,4 @@
-package]
+[package]
 version = 1.2.1
 tags = known-services, known_services 
 script_dir = scripts
