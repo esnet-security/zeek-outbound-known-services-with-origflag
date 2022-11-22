@@ -1,5 +1,5 @@
 # @TEST-EXEC: /usr/local/zeek/bin/zeek -C -r $TRACES/known_services_test.pcap ../../../scripts %INPUT
-# @TEST-EXEC: cat known_services_outbound.log | grep fields > fields.txt
-# @TEST-EXEC: /usr/local/zeek/bin/btest-diff known_services_outbound.log
+# @TEST-EXEC: cat known_services_out.log | /usr/local/zeek/bin/zeek-cut host port_num port_proto service is_local_orig > known_out.log
+# @TEST-EXEC: /usr/local/zeek/bin/btest-diff known_out.log
 
 redef Site::local_nets += {192.168.1.1/32};
